@@ -1,10 +1,11 @@
 import React from "react";
 
+
 const Menu = props => {
 	return (
 		<div className="menu_list">
 			<div onClick={props.onClick}>
-				<img src={props.image} alt=""/>
+				<img src={props.image} alt="image"/>
 				<p>{props.name}</p>
 				<p>Price: {props.price} kgs</p>
 			</div>
