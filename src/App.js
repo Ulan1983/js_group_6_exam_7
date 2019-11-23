@@ -43,53 +43,47 @@ class App extends Component {
     item.count++;
     let totalPrice = this.state.totalPrice + item.price;
     items[index] = item;
-    let usedPositions = [...this.state.usedPositions];
-    if (!usedPositions.includes(position)) {
-      usedPositions.push(position);
+    let requestedItems = [...this.state.requestedItems];
+    if (!requestedItems.includes(item)) {
+      requestedItems.push(item);
     }
-    let initialText = ' ';
-    this.setState({totalPrice, positions, usedPositions, initialText});
+    let text = ' ';
+    this.setState({totalPrice, items, requestedItems, text});
   };
 
-  removeElement = (index) => {
-    let usedPositions = [...this.state.usedPositions];
-    let usedPosition = usedPositions[index];
-    if (usedPosition.count > 1) {
-      usedPosition.count--;
-      let totalPrice = this.state.totalPrice - usedPosition.price;
-      usedPositions[index] = usedPosition;
-      this.setState({totalPrice, usedPositions});
-    } else {
-      usedPositions.splice(index, 1);
-      let totalPrice = this.state.totalPrice - usedPosition.price;
-      let initialText = 'Order is empty! Please add some items!';
-      this.setState({totalPrice, usedPositions, initialText});
-    }
-  };
+  removeItem = () => {
+
+  }
+
+
 
   render() {
     return (
         <div className="App">
-          <h4 className="menuItem">Menu</h4>
-          <div className="menu">
-            {POSITIONS.map((pos, key) =>
-                <Positions
+          <div className="box box1">
+            <span className="title">Add items</span>
+            <div className="menu">
+            {Items.map((pos, key) =>
+                <Menu
                     key={key}
                     image={pos.image}
                     name={pos.name}
-                    price={this.state.positions[key].price}
-                    onClick={() => this.addElement(key)}
+                    price={this.state.items[key].price}
+                    onClick={() => this.addItem(key)}
                 />
             )}
+            </div>
           </div>
-          <h4 className="menuItem">Order list</h4>
-          <div className="orderWrap">
-            <Order
-                initialText = {this.state.initialText}
-                usedPositions={this.state.usedPositions}
-                total={this.state.totalPrice}
-                remove={this.removeElement}
-            />
+          <div className="box box2">
+            <span className="title">Order details</span>
+            <div className="order">
+              <Order
+                text = {this.state.text}
+                requestedItems={this.state.requestedItems}
+                totalPrice={this.state.totalPrice}
+                remove={this.removeItem}
+              />
+            </div>
           </div>
         </div>
     );

@@ -3,7 +3,7 @@ import React from "react";
 
 const Order = props => {
 	return (
-		<div className="order">
+		<div className="order_div">
 			<p>{props.text}</p>
 			{props.requestedItems.map((ingr, key) => {
 				return (
@@ -11,7 +11,7 @@ const Order = props => {
 						<p>{ingr.name}</p>
 						<span>{ingr.count} x</span>
 						<span>{ingr.price} kgs</span>
-						<button onClick={() => props.remove(key)}>X</button>
+						<button className="btn" onClick={() => props.remove(key)}> X </button>
 					</div>
 				)
 			})}
